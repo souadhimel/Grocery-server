@@ -26,7 +26,13 @@ app.post("/vegetable",async(req, res) => {
 
 })
 
-
+// Read (GET)
+app.get("/vegetable",async(req,res)=>{
+    const query={}
+    const cursor=vegetableCollection.find(query)
+    const vegetables=await cursor.toArray()
+    res.send(vegetables)
+})
     }
     finally{
 // await client.close()
