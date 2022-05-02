@@ -24,19 +24,9 @@ app.post("/vegetable",async(req, res) => {
     const result=await vegetableCollection.insertOne(veg);
     res.json(result);
 
-    // if (!veg.name || veg.price) {
-//     return res.send({success: false, error: 'Please provide all desired info!!'});   
-// }
-    // res.send({success: true, message:`Successfully inserted ${veg.name}`});
 })
 
-// Read (GET)
-app.get("/vegetable",async(req,res)=>{
-    const query={}
-    const cursor=vegetableCollection.find(query)
-    const vegetables=await cursor.toArray()
-    res.send(vegetables)
-})
+
     }
     finally{
 // await client.close()
