@@ -1,6 +1,7 @@
 const express=require('express');
 const cors=require('cors');
 const app=express();
+const ObjectId = require("mongodb").ObjectId;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 const port=process.env.PORT ||5000;
@@ -33,6 +34,16 @@ app.get("/vegetable",async(req,res)=>{
     const vegetables=await cursor.toArray()
     res.send(vegetables)
 })
+
+ // Get Single package
+ app.get("/vegetable/:id", async (req, res) => {
+    const id = req.params;
+    console.log("getting specific place", id);
+    const query = { _id: ObjectId(id) };
+    const vegetable = await vegetableCollection.findOne(query);
+    res.send(vegetable);
+  });
+
     }
     finally{
 // await client.close()
@@ -42,10 +53,6 @@ app.get("/vegetable",async(req,res)=>{
 }
 
 run().catch(console.dir)
-
-
-
-
 
 app.get('/',(req, res) => {
     res.send("Running my grocery shop")
