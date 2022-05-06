@@ -19,6 +19,8 @@ async function run(){
 await client.connect()
 const vegetableCollection=client.db("groceryShop").collection("vegetable");
 
+//..........................Create(C):(POST)...........................//
+
 // Create (POST)
 app.post("/vegetable",async(req, res) => {
     const veg=req.body;
@@ -27,6 +29,7 @@ app.post("/vegetable",async(req, res) => {
 
 })
 
+// ........................Read(R):(GET).................................//
 // Read (GET)
 app.get("/vegetable",async(req,res)=>{
     const query={}
@@ -43,6 +46,18 @@ app.get("/vegetable",async(req,res)=>{
     const vegetable = await vegetableCollection.findOne(query);
     res.send(vegetable);
   });
+
+
+
+
+//...................Delete(D):(DELETE)..........................//
+    // Delete an inventory
+    app.delete("/vegetable/:id", async (req, res) => {
+        const id = req.params;
+        const query = { _id: ObjectId(id) };
+        const result = await vegetableCollection.deleteOne(query);
+        res.send(result);
+      });
 
     }
     finally{
