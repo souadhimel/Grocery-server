@@ -47,7 +47,24 @@ app.get("/vegetable",async(req,res)=>{
     res.send(vegetable);
   });
 
-
+  //...........................Update(U):(PUT)........................//
+  // Update quantity
+  app.put("/vegetable/:id", async (req, res) => {
+    const id = req.params.id;
+    const updatedStock = req.body;
+    const filter = { _id: ObjectId(id) };
+    const options = { upsert: true };
+    const updateDocument = {
+      $set: updatedStock
+  };
+    const result = await vegetableCollection.updateOne(
+      filter,
+      updateDocument,
+      options
+    );
+    console.log("updating", id);
+    res.send(result);
+  });
 
 
 //...................Delete(D):(DELETE)..........................//
