@@ -90,6 +90,10 @@ app.get('/',(req, res) => {
     res.send("Running my grocery shop")
 })
 
+app.get('/hero',(req, res) => {
+    res.send("hero meets here")
+})
+
 app.listen(port,()=>{
 console.log("Listening on port",port);
 })
